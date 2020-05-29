@@ -1,11 +1,7 @@
-import pygame
-import time
+import pygame, time
+import fonctions as fonc
+from pygame.locals import *
 
 pygame.init()
-window = pygame.display.set_mode((600, 300))
-myFont = pygame.font.SysFont("Arial", 60)
-label = myFont.render("Hello pyGame!", 1, (255, 255, 0))
-window.blit(label, (100, 100))
-pygame.display.update()
-time.sleep(5)
-pygame.quit()
+fenetre = pygame.display.set_mode((640, 480))
+start = fonc.menu(fonc.play(),fonc.credits(fenetre), fenetre)
