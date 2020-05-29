@@ -1,7 +1,8 @@
 import pygame, time
 from pygame.locals import *
+import classes as cla
 
-def menu(Play, credits, fenetre):
+def menu(Play, Credits, fenetre):
 
 
     fond = pygame.image.load("images/backgroundMenu.jpg").convert()
@@ -29,25 +30,25 @@ def menu(Play, credits, fenetre):
     cursorPos = 1
     while continuer:
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 continuer = False
                 pygame.quit()
-            if event.type == KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == K_UP and cursorPos != 1:
                     position_arrow = position_arrow.move(0, -100)
                     cursorPos -= 1
-                if event.key == K_DOWN and cursorPos != 4:
+                elif event.key == K_DOWN and cursorPos != 4:
                     position_arrow = position_arrow.move(0,100)
                     cursorPos += 1
-                if event.key == K_SPACE:
+                elif event.key == K_SPACE:
                     if cursorPos == 1:
                         Play
-                    if cursorPos == 2:
+                    elif cursorPos == 2:
                         print("select 2")
-                    if cursorPos == 3: ##################################### Credits #####################################
-                        credits
+                    elif cursorPos == 3: ##################################### Credits #####################################
+                        Credits
                         print("lance crédit")
-                    if cursorPos == 4:
+                    elif cursorPos == 4:
                         continuer = False
 
         fenetre.blit(fond, (0, 0))
@@ -92,18 +93,37 @@ def credits(fenetre): #Test mais fonctionne pas du coup direct dans la fonction 
         fenetre.blit(Quitter, (510, 580))
         pygame.display.flip()
 
+
+
+
+
 def play():
     pygame.init()
     fenetre = pygame.display.set_mode((640, 640))
 
     fond = pygame.image.load("images/backgroundPlay.jpeg").convert()
-    fenetre.blit(fond, (0, 0))
+
+
+    game = cla.Game()
 
     jouer = True
     while jouer:
+        if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x < 590:
+            game.player.move_right()
+        elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+            game.player.move_left()
+
+
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 jouer = False
+            if event.type == pygame.KEYDOWN:
+                game.pressed[event.key] = True
+            if event.type == pygame.KEYUP:
+                game.pressed[event.key] = False
+
 
         fenetre.blit(fond, (0, 0))
+        fenetre.blit(game.player.image, game.player.rect)
+
         pygame.display.flip()
