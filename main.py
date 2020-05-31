@@ -16,7 +16,7 @@ game = Game()
 
 # Boucle infinie
 continuer = 1
-pygame.key.set_repeat(50, 5)
+pygame.key.set_repeat(10, 10)
 
 while continuer:
 
@@ -24,6 +24,13 @@ while continuer:
 
     # appliquer image joueur
     fenetre.blit(game.player.image, game.player.rect)
+
+    #recuperer projectile joueur
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    # Charger ensemble image groupe projectile
+    game.player.all_projectiles.draw(fenetre)
 
     # Rafraîchissement de l'écran
     pygame.display.flip()
@@ -42,3 +49,8 @@ while continuer:
             game.player.move_up()
         if pressed[K_s] and game.player.rect.y < 640 - 96:  # Si "touche d"
             game.player.move_down()
+        # tir joueur
+        if event.type == KEYUP:
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
+                print("space")

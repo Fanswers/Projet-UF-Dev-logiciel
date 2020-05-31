@@ -1,4 +1,5 @@
 import pygame
+from projectile import Projectile, Projectile2
 
 class Player(pygame.sprite.Sprite):
 
@@ -6,11 +7,16 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.credit = 0
         self.vel = 5
+        self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load("images/vaisseau.png").convert_alpha()
         self.affImg = 0
         self.rect = self.image.get_rect()
         self.rect.x = 285
         self.rect.y = 544
+
+    def launch_projectile(self):
+        self.all_projectiles.add(Projectile(self))
+        self.all_projectiles.add(Projectile2(self))
 
     def move_left(self):
         self.rect.x -= self.vel
