@@ -1,13 +1,13 @@
 import pygame, time
 from pygame.locals import *
-class Game:
+class Game: ########### Création d'une classe game ou son stocké toutes nos classe ###########
     def __init__(self):
         self.player = Player()
         self.pressed = {}
 
 
 
-class Player(pygame.sprite.Sprite):
+class Player(pygame.sprite.Sprite): ########### Création d'une classe Player ou les caractéristiques du joueur seront définit ###########
     def __init__(self):
         super().__init__()
         self.health = 1
@@ -19,8 +19,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = 290
         self.rect.y = 530
 
-    def move_right(self):
+    def move_right(self): ########### Mouvement vers la droite du joueur qui dépend de sa vitesse ###########
         self.rect.x += self.swift
 
-    def move_left(self):
+    def move_left(self): ########### Mouvement vers la gauche du joueur qui dépend de sa vitesse ###########
         self.rect.x -= self.swift
