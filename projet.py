@@ -1,6 +1,5 @@
 import pygame, time
 import fonctions as fonc
-import classes as cla
 from pygame.locals import *
 
 pygame.init()
