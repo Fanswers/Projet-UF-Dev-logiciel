@@ -7,9 +7,9 @@ pygame.init()
 
 fenetre = pygame.display.set_mode((640, 640))
 
-fond = pygame.image.load("images/backgroundMenu.jpg").convert()
+fond = pygame.image.load("images/backgroundMenu.jpg")
 
-arrow = pygame.image.load("images/arrow.png").convert()
+arrow = pygame.image.load("images/arrow.png").convert_alpha()
 position_arrow = arrow.get_rect()
 position_arrow = position_arrow.move(100, 100)
 
