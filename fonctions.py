@@ -50,14 +50,22 @@ def play(): ##### Fonction de lancement du jeu #####
 
     # Boucle infinie
     continuer = 1
-    pygame.key.set_repeat(10, 10)
 
     while continuer:
-
+        pygame.key.set_repeat(400, 30)
         fenetre.blit(fond, (0, 0))
 
         # appliquer image joueur
         fenetre.blit(game.player.image, game.player.rect)
+
+        if game.pressed.get(pygame.K_q) and game.player.rect.x > 0:
+            game.player.move_left()
+        if game.pressed.get(pygame.K_d) and game.player.rect.x < 640 - 69:
+            game.player.move_right()
+        if game.pressed.get(pygame.K_z) and game.player.rect.y > 0:
+            game.player.move_up()
+        if game.pressed.get(pygame.K_s) and game.player.rect.y < 640 - 96:
+            game.player.move_down()
 
         # recuperer projectile joueur
         for projectile in game.player.all_projectiles:
@@ -70,21 +78,17 @@ def play(): ##### Fonction de lancement du jeu #####
         pygame.display.flip()
 
         for event in pygame.event.get():  # Attente des événements
+            pressed = pygame.key.get_pressed()
             # fermeture fenetre
             if event.type == QUIT:
                 continuer = 0
             # detecter mouvement joueur
-            pressed = pygame.key.get_pressed()
-            if pressed[K_q] and game.player.rect.x > 0:  # Si "touche q"
-                game.player.move_left()
-            if pressed[K_d] and game.player.rect.x < 640 - 69:  # Si "touche d"
-                game.player.move_right()
-            if pressed[K_z] and game.player.rect.y > 0:  # Si "touche z"
-                game.player.move_up()
-            if pressed[K_s] and game.player.rect.y < 640 - 96:  # Si "touche d"
-                game.player.move_down()
-            # tir joueur
-            if event.type == KEYUP:
+            elif event.type == pygame.KEYDOWN:
+                game.pressed[event.key] = True
+                #Touche espace
                 if event.key == pygame.K_SPACE:
                     game.player.launch_projectile()
-                    print("space")
+
+            elif event.type == pygame.KEYUP:
+                game.pressed[event.key] = False
+
