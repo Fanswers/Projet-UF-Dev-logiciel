@@ -23,13 +23,11 @@ fenetre.blit(instruction, (280, 200))
 fenetre.blit(credit, (280, 300))
 fenetre.blit(quitter, (280, 400))
 
-pygame.key.set_repeat(400, 30)
-
 cursorPos = 1 ### Variable qui permet de savoir ou se trouve la sélection du joueur dans le menu ###
 
 lancement = True
-
 while lancement: ##### Boucle principale / menu avant lancement u jeu #####
+    pygame.key.set_repeat(400, 30)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             lancement = False
