@@ -9,11 +9,11 @@ class Ennemies(pygame.sprite.Sprite):
         self.health = 100
         self.max_health = 100
         self.attack = 5
-        self.swift = 1
+        self.swift = 2
         self.image = pygame.image.load('images/blueEnnemi.png')
         self.rect = self.image.get_rect()
         self.rect.y = -50
-        self.rect.x = random.randint(0, 600)
+        self.rect.x = random.randint(0, 580)
 
     def forward(self):
         if not self.game.collider(self, self.game.all_player):
@@ -31,7 +31,7 @@ class Ennemies(pygame.sprite.Sprite):
             self.remove()
             self.game.player.credit += 500
 
-
+        # Lorsque l'ennemi n'a plus que 50% de ses pdv, son apparence change
         if self.health <=50:
             self.image = pygame.image.load('images/blueEnnemiBroken.png')
 

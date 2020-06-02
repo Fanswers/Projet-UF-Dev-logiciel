@@ -115,11 +115,8 @@ def play(): ##### Fonction de lancement du jeu #####
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
             if event.type == USEREVENT: # User event toute les secondes et demis // Spawn d'ennemis
-                AleaSpawn = random.randint(2, 4)
-                i = 0
-                while i < AleaSpawn:
                     game.Spawn_ennemies()
-                    i += 1
+
 
         if game.player.health < 0:
             print("mort")
