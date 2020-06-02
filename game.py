@@ -20,9 +20,10 @@ class Game :
 
 
 
-    def Spawn_ennemies(self):
+    def Spawn_ennemies(self, SpawnMin, SpawnMax):
         tabSpawn= [0, 64, 128, 192, 256, 320, 384, 448, 512, 576]
-        AleaSpawn = random.randint(2, 4)
+
+        AleaSpawn = random.randint(SpawnMin, SpawnMax)
         i = 0
         x = 9
         while i < AleaSpawn:

@@ -139,6 +139,9 @@ def play(): ##### Fonction de lancement du jeu #####
 
     # Charger notre jeu
     game = Game()
+    SpawnMin = 2
+    SpawnMax = 4
+    compteurSpawn = 0
 
     # Création d'un userevent qui s'effectuera toutes les secondes et demies
     pygame.time.set_timer(USEREVENT, 1500)
@@ -368,8 +371,21 @@ def play(): ##### Fonction de lancement du jeu #####
 
 
             if event.type == USEREVENT: # User event toute les secondes et demis // Spawn d'ennemis
-                    game.Spawn_ennemies()
+                    game.Spawn_ennemies(SpawnMin, SpawnMax)
+                    compteurSpawn += 1
 
+            if compteurSpawn == 29:
+                SpawnMin = 3
+                SpawnMax = 6
+            if compteurSpawn == 49:
+                SpawnMin = 4
+                SpawnMax = 6
+            if compteurSpawn == 69:
+                SpawnMin = 4
+                SpawnMax = 7
+            if compteurSpawn == 99:
+                SpawnMin = 5
+                SpawnMax = 7
 
         if game.player.health < 0:
             gameover = True
