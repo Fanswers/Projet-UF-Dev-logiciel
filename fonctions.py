@@ -235,16 +235,11 @@ def play(): ##### Fonction de lancement du jeu #####
                     myFont3 = pygame.font.SysFont("Arial", 30)
                     Shop = myFont.render("Magasin", 1, (255, 255, 0))
                     Quitter = myFont2.render("Quitter", 1, (255, 255, 0))
-                    CreditsActu = myFont2.render(str(game.player.credit), 1, (255, 69, 0))
                     CreditsActu2 = myFont2.render("Credits", 1, (255, 69, 0))
                     Atk = myFont3.render("Attaque :", 1, (255, 255, 0))
                     VitAtk = myFont3.render("Vit d'attaque :", 1, (255, 255, 0))
                     Vit = myFont3.render("Vitesse :", 1, (255, 255, 0))
                     Chance = myFont3.render("Chance :", 1, (255, 255, 0))
-                    PRIXatk = myFont3.render(str(prixAtk), 1, (255, 69, 0))
-                    PRIXvitatk = myFont3.render(str(prixVitAtk), 1, (255, 69, 0))
-                    PRIXvit = myFont3.render(str(prixVit), 1, (255, 69, 0))
-                    PRIXchance = myFont3.render(str(prixChance), 1, (255, 69, 0))
                     Credit = myFont3.render("creds", 1, (255, 69, 0))
                     MAX = myFont3.render("MAX", 1, (255, 0, 0))
 
@@ -258,6 +253,12 @@ def play(): ##### Fonction de lancement du jeu #####
                     shop = True
                     cursorShop = 0
                     while shop: ############Boucle du Shop#############
+                        PRIXatk = myFont3.render(str(prixAtk), 1, (255, 69, 0))
+                        PRIXvitatk = myFont3.render(str(prixVitAtk), 1, (255, 69, 0))
+                        PRIXvit = myFont3.render(str(prixVit), 1, (255, 69, 0))
+                        PRIXchance = myFont3.render(str(prixChance), 1, (255, 69, 0))
+                        CreditsActu = myFont2.render(str(game.player.credit), 1, (255, 69, 0))
+
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 shop = False
