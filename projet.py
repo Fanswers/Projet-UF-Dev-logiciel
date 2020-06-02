@@ -34,10 +34,10 @@ while lancement: ##### Boucle principale / menu avant lancement u jeu #####
         if event.type == pygame.QUIT:
             lancement = False
         if event.type == pygame.KEYDOWN:
-            if event.key == K_UP and cursorPos != 1:
+            if (event.key == K_UP or event.key == K_z) and cursorPos != 1:
                 position_arrow = position_arrow.move(0, -100)
                 cursorPos -= 1
-            elif event.key == K_DOWN and cursorPos != 4:
+            elif (event.key == K_DOWN or event.key == K_s) and cursorPos != 4:
                 position_arrow = position_arrow.move(0, 100)
                 cursorPos += 1
             elif event.key == K_SPACE:

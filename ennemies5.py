@@ -29,7 +29,7 @@ class Ennemies5(pygame.sprite.Sprite):
 
         if self.health <= 0: #Lorsque l'ennemi n'a plus de pv il se supprime et le joueur gagne des crédits
             self.remove()
-            self.game.player.credit += 500
+            self.game.player.credit += 5
 
         # Lorsque l'ennemi n'a plus que 50% de ses pdv, son apparence change
         if self.health <=50:
@@ -37,5 +37,5 @@ class Ennemies5(pygame.sprite.Sprite):
 
     #fonction game over lorsqu'un ennemi touche le bas de l'écran
     def game_over(self):
-        if self.rect.y == 640:
+        if self.rect.y >= 630:
             self.game.player.health -= 100
