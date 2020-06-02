@@ -44,7 +44,7 @@ while lancement: ##### Boucle principale / menu avant lancement u jeu #####
                 if cursorPos == 1: ##################################### fonction play #####################################
                     fonc.play()
                 elif cursorPos == 2:
-                    print("Instruction")
+                    fonc.instruction()
                 elif cursorPos == 3:  ##################################### fonction Credits #####################################
                     fonc.credits()
                 elif cursorPos == 4:
