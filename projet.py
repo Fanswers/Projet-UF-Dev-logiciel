@@ -42,7 +42,7 @@ while lancement: ##### Boucle principale / menu avant lancement u jeu #####
                 cursorPos += 1
             elif event.key == K_SPACE:
                 if cursorPos == 1: ##################################### fonction play #####################################
-                    fonc.play()
+                    fonc.sauvegarde()
                 elif cursorPos == 2:
                     fonc.instruction()
                 elif cursorPos == 3:  ##################################### fonction Credits #####################################

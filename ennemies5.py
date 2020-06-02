@@ -1,4 +1,4 @@
-import pygame
+import pygame, pickle
 import random
 from pygame.locals import *
 
@@ -29,7 +29,9 @@ class Ennemies5(pygame.sprite.Sprite):
 
         if self.health <= 0: #Lorsque l'ennemi n'a plus de pv il se supprime et le joueur gagne des crédits
             self.remove()
-            self.game.player.credit += 500
+            into = int(self.game.player.playerData[self.game.player.playerDataIdentify][1]) + 500
+            self.game.player.playerData[self.game.player.playerDataIdentify][1] = str(into)
+            pickle.dump(self.game.player.playerData, open("playerData.dat", "wb"))
 
         # Lorsque l'ennemi n'a plus que 50% de ses pdv, son apparence change
         if self.health <=50:

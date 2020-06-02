@@ -1,6 +1,11 @@
-import pygame
+from typing import List, Union
+
+import pygame, pickle
 from projectile import Projectile, Projectile2
 
+take = pickle.load(open("playerData.dat", "rb"))
+take[0][0] = 1
+pickle.dump(take, open("playerData.dat", "wb"))
 
 class Player(pygame.sprite.Sprite):
 
@@ -8,9 +13,12 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.game = game
         self.health = 100
-        self.credit = 0
+        self.playerData = pickle.load(open("playerData.dat", "rb"))
+        self.playerDataIdentify = int(self.playerData[0][0])
+        print(self.playerData)
+        self.credit = int(self.playerData[self.playerDataIdentify][1])
         self.vel = 10
-        self.shootingDelay = 300
+        self.shootingDelay = 150
         self.atk = 50
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
