@@ -141,8 +141,14 @@ def play(): ##### Fonction de lancement du jeu #####
     # Création d'un userevent qui s'effectuera toutes les secondes et demies
     pygame.time.set_timer(USEREVENT, 1500)
 
+
+    # Variable de défaite
+    gameover = False
+
+
+
     # Boucle infinie
-    continuer = 1
+    continuer = True
     t = 0
     while continuer:
         pygame.time.delay(10)
@@ -197,7 +203,7 @@ def play(): ##### Fonction de lancement du jeu #####
             pressed = pygame.key.get_pressed()
             # fermeture fenetre
             if event.type == QUIT:
-                continuer = 0
+                continuer = False
             # detecter mouvement joueur
 
             elif event.type == pygame.KEYDOWN:
@@ -209,8 +215,38 @@ def play(): ##### Fonction de lancement du jeu #####
 
 
         if game.player.health < 0:
-            print("mort")
+            gameover = True
+            continuer = False
 
-        print(game.player.credit)
-        print()
+
+
+    if gameover == True:
+        fond = pygame.image.load("images/backgroundMenu.jpg").convert()
+        myFont = pygame.font.SysFont("Arial", 85)
+        myFont2 = pygame.font.SysFont("Arial", 45)
+        Fin = myFont.render("GAME OVER", 1, (255, 255, 0))
+        Score = myFont2.render("score :", 1, (255, 255, 0))
+        #Credit = game.player.credit
+        #Score2 = myFont2.render(Credit, 1, (255, 255, 0))
+        print("mort")
+        end = True
+        while end:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    end = False
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    end = False
+            fenetre.blit(fond, (0, 0))
+            fenetre.blit(Fin, (100, 150))
+            fenetre.blit(Score, (120, 300))
+            #fenetre.blit(Score2, (200, 250))
+            pygame.display.flip()
+
+
+
+
+
+
+
 
