@@ -12,6 +12,7 @@ class Game :
     def __init__(self):
         # generer joueur nouvelle partie
         self.player = Player(self)
+        self.Ennemies5 = Ennemies5(self)
         self.pressed = {}
         self.all_player = pygame.sprite.Group()
         self.all_player.add(self.player)
@@ -27,14 +28,14 @@ class Game :
         while i < AleaSpawn:
             AleaSpawn2 = random.randint(0, x)
             AleaSpawn3 = random.randint(0, 100)
-            if AleaSpawn3 <= 2:
+            if AleaSpawn3 <= self.Ennemies5.proba:
                 ennemies = Ennemies5(self)
                 ennemies.rect.x = tabSpawn[AleaSpawn2]
                 tabSpawn.pop(AleaSpawn2)
                 x -= 1
                 self.all_ennemies.add(ennemies)
                 i += 1
-            elif AleaSpawn3 > 2 and AleaSpawn3 <= 7:
+            elif AleaSpawn3 > self.Ennemies5.proba and AleaSpawn3 <= 7:
                 ennemies = Ennemies4(self)
                 ennemies.rect.x = tabSpawn[AleaSpawn2]
                 tabSpawn.pop(AleaSpawn2)

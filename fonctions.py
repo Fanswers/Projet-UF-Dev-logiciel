@@ -35,6 +35,8 @@ def instruction(): ##### Fonction d'affichage des credits #####
 
 
 
+
+
     myFontdesc = pygame.font.SysFont("Arial", 30)
     DescBlue = myFontdesc.render("Normal", 1, (255, 255, 0))
     DescRed = myFontdesc.render("Résistant", 1, (255, 255, 0))
@@ -145,6 +147,19 @@ def play(): ##### Fonction de lancement du jeu #####
     # Variable de défaite
     gameover = False
 
+    ############ Initialisation des variables des prix du shop #############
+    prixAtk = 50
+    maxAtk = 5
+    ComptAtk = 0
+    prixVitAtk = 50
+    maxVitAtk = 5
+    ComptVitAtk = 0
+    prixVit = 100
+    maxVit = 3
+    ComptVit = 0
+    prixChance = 1000
+    maxChance = 2
+    ComptChance = 1
 
 
     # Boucle infinie
@@ -208,8 +223,117 @@ def play(): ##### Fonction de lancement du jeu #####
 
             elif event.type == pygame.KEYDOWN:
                 game.pressed[event.key] = True
+
+                if event.key == K_p: ###################################### MAGASIN ######################################
+                    fondShop = pygame.image.load("images/backgroundMenu.jpg").convert()
+                    myFont = pygame.font.SysFont("Arial", 85)
+                    myFont2 = pygame.font.SysFont("Arial", 45)
+                    myFont3 = pygame.font.SysFont("Arial", 30)
+                    Shop = myFont.render("Magasin", 1, (255, 255, 0))
+                    Quitter = myFont2.render("Quitter", 1, (255, 255, 0))
+                    Atk = myFont3.render("Attaque :", 1, (255, 255, 0))
+                    VitAtk = myFont3.render("Vit d'attaque :", 1, (255, 255, 0))
+                    Vit = myFont3.render("Vitesse :", 1, (255, 255, 0))
+                    Chance = myFont3.render("Chance :", 1, (255, 255, 0))
+
+                    arrowShop = pygame.image.load("images/arrow.png").convert_alpha()
+                    position_arrowShop = arrowShop.get_rect()
+                    position_arrowShop = position_arrowShop.move(30, 350)
+
+
+
+
+                    shop = True
+                    cursorShop = 0
+                    while shop: ############Boucle du Shop#############
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                shop = False
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == K_p:
+                                    shop = False
+                                elif event.key == K_UP and cursorShop == 3:
+                                    position_arrowShop = position_arrowShop.move(0, -100)
+                                    cursorShop = 1
+                                elif event.key == K_UP and cursorShop == 4:
+                                    position_arrowShop = position_arrowShop.move(0, -100)
+                                    cursorShop = 2
+                                elif event.key == K_UP and cursorShop == 5:
+                                    position_arrowShop = position_arrowShop.move(-120, -130)
+                                    cursorShop = 4
+                                elif event.key == K_DOWN and cursorShop == 1 or event.key == K_DOWN and cursorShop == 0:
+                                    position_arrowShop = position_arrowShop.move(0, 100)
+                                    cursorShop = 3
+                                elif event.key == K_DOWN and cursorShop == 2 or event.key == K_DOWN and cursorShop == 0:
+                                    position_arrowShop = position_arrowShop.move(0, 100)
+                                    cursorShop = 4
+                                elif event.key == K_DOWN and cursorShop == 3:
+                                    position_arrowShop = position_arrowShop.move(390, 130)
+                                    cursorShop = 5
+                                elif event.key == K_DOWN and cursorShop == 4:
+                                    position_arrowShop = position_arrowShop.move(120, 130)
+                                    cursorShop = 5
+                                elif event.key == K_RIGHT and cursorShop == 1 or event.key == K_RIGHT and cursorShop == 0:
+                                    position_arrowShop = position_arrowShop.move(270, 0)
+                                    cursorShop = 2
+                                elif event.key == K_RIGHT and cursorShop == 3:
+                                    position_arrowShop = position_arrowShop.move(270, 0)
+                                    cursorShop = 4
+                                elif event.key == K_LEFT and cursorShop == 2:
+                                    position_arrowShop = position_arrowShop.move(-270, 0)
+                                    cursorShop = 1
+                                elif event.key == K_LEFT and cursorShop == 4:
+                                    position_arrowShop = position_arrowShop.move(-270, 0)
+                                    cursorShop = 3
+
+                                elif event.key == K_SPACE:
+                                    if cursorShop == 1 and game.player.credit > prixAtk and ComptAtk < maxAtk:
+                                        game.player.credit -= prixAtk
+                                        prixAtk = prixAtk * 2
+                                        ComptAtk += 1
+                                    if cursorShop == 2 and game.player.credit > prixVitAtk and ComptVitAtk < maxVitAtk:
+                                        game.player.credit -= prixVitAtk
+                                        prixVitAtk = prixVitAtk * 2
+                                        ComptVitAtk += 1
+                                    if cursorShop == 3 and game.player.credit > prixVit and ComptVit < maxVit:
+                                        game.player.credit -= prixVit
+                                        prixVit = prixVit * 2
+                                        ComptVit += 1
+                                    if cursorShop == 4 and game.player.credit > prixChance and ComptChance < maxChance:
+                                        game.player.credit -= prixChance
+                                        prixChance = prixChance * 2
+                                        ComptChance += 1
+                                        game.Ennemies5.proba += 1
+                                        print("Achat effectué")
+                                        print(game.Ennemies5.proba)
+                                    if cursorShop == 5:
+                                        shop = False
+
+
+                        fenetre.blit(fondShop, (0, 0))
+                        fenetre.blit(arrowShop, position_arrowShop)
+                        fenetre.blit(Atk, (120, 357))
+
+                        fenetre.blit(VitAtk, (390, 357))
+
+                        fenetre.blit(Vit, (120, 457))
+
+                        fenetre.blit(Chance, (390, 457))
+
+                        fenetre.blit(Quitter, (510, 580))
+                        fenetre.blit(Shop, (200, 150))
+                        pygame.display.flip()
+
+
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
+                if event.key == K_q:
+                    game.player.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
+                if event.key == K_d:
+                    game.player.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
+
+
+
             if event.type == USEREVENT: # User event toute les secondes et demis // Spawn d'ennemis
                     game.Spawn_ennemies()
 
