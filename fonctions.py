@@ -126,4 +126,3 @@ def play(): ##### Fonction de lancement du jeu #####
 
         print(game.player.credit)
         print()
-
