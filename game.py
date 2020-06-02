@@ -7,7 +7,7 @@ class Game :
 
     def __init__(self):
         # generer joueur nouvelle partie
-        self.player = Player()
+        self.player = Player(self)
         self.pressed = {}
         self.all_player = pygame.sprite.Group()
         self.player = Player(self)
