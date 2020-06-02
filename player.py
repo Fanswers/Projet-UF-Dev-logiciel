@@ -1,13 +1,17 @@
 import pygame
 from projectile import Projectile, Projectile2
 
+
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, game):
         super().__init__()
+        self.game = game
+        self.health = 100
         self.credit = 0
         self.vel = 10
         self.shootingDelay = 50
+        self.atk = 50
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
         self.rect = self.image.get_rect()
@@ -33,3 +37,8 @@ class Player(pygame.sprite.Sprite):
     def move_down(self):
         self.rect.y += self.vel
         self.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
+        print(self.health)
+
+    def take_damage(self):
+        if self.game.collider(self, self.game.all_ennemies):
+            self.health -= 100

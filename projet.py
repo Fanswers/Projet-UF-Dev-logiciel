@@ -1,7 +1,7 @@
 import pygame, time
 import fonctions as fonc
 from pygame.locals import *
-
+import random
 pygame.init()
 
 fenetre = pygame.display.set_mode((640, 640))
@@ -22,6 +22,8 @@ fenetre.blit(start, (150, 100))
 fenetre.blit(instruction, (280, 200))
 fenetre.blit(credit, (280, 300))
 fenetre.blit(quitter, (280, 400))
+
+
 
 cursorPos = 1 ### Variable qui permet de savoir ou se trouve la sélection du joueur dans le menu ###
 

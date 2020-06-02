@@ -1,4 +1,5 @@
 import pygame, time
+import random
 from pygame.locals import *
 from game import Game
 
@@ -8,7 +9,7 @@ def credits(): ##### Fonction d'affichage des credits #####
 
     fond = pygame.image.load("images/backgroundMenu.jpg").convert()
 
-    arrow = pygame.image.load("images/arrow.png").convert()
+    arrow = pygame.image.load("images/arrow.png").convert_alpha()
     position_arrow = arrow.get_rect()
     position_arrow = position_arrow.move(100,100)
     fenetre.blit(arrow, position_arrow)
@@ -47,6 +48,9 @@ def play(): ##### Fonction de lancement du jeu #####
     # Charger notre jeu
     game = Game()
 
+    # Création d'un userevent qui s'effectuera toutes les secondes et demies
+    pygame.time.set_timer(USEREVENT, 1500)
+
     # Boucle infinie
     continuer = 1
     t = 0
@@ -54,6 +58,9 @@ def play(): ##### Fonction de lancement du jeu #####
         pygame.time.delay(10)
         pygame.key.set_repeat(400, 30)
         fenetre.blit(fond, (0, 0))
+
+        # ajout d'un délait qui arrete le programme légérement pour que les déplacement soit plus lent
+        pygame.time.delay(10)
 
         # appliquer image joueur
         fenetre.blit(game.player.image, game.player.rect)
@@ -75,8 +82,23 @@ def play(): ##### Fonction de lancement du jeu #####
         for projectile in game.player.all_projectiles:
             projectile.move()
 
+        # recuperer les monsters
+        for ennemies in game.all_ennemies:
+            ennemies.forward()
+
+        # recuperer le joueur
+        for player in game.all_player:
+            player.take_damage()
+
         # Charger ensemble image groupe projectile
         game.player.all_projectiles.draw(fenetre)
+
+        # Charger ensemble image groupe ennemis
+        game.all_ennemies.draw(fenetre)
+
+
+
+
 
         # Rafraîchissement de l'écran
         pygame.display.flip()
@@ -87,8 +109,21 @@ def play(): ##### Fonction de lancement du jeu #####
             if event.type == QUIT:
                 continuer = 0
             # detecter mouvement joueur
+
             elif event.type == pygame.KEYDOWN:
                 game.pressed[event.key] = True
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
+            if event.type == USEREVENT: # User event toute les secondes et demis // Spawn d'ennemis
+                AleaSpawn = random.randint(2, 4)
+                i = 0
+                while i < AleaSpawn:
+                    game.Spawn_ennemies()
+                    i += 1
+
+        if game.player.health < 0:
+            print("mort")
+
+        print(game.player.credit)
+        print()
 
