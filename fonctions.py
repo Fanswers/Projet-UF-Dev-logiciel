@@ -38,12 +38,20 @@ def credits(): ##### Fonction d'affichage des credits #####
 
 
 def play(): ##### Fonction de lancement du jeu #####
+    green = (0, 255, 0)
+    blue = (0, 0, 128)
     # Ouverture de la fenêtre Pygame
     pygame.display.set_caption("Space shooter")
-    fenetre = pygame.display.set_mode((640, 640))
+    fenetre = pygame.display.set_mode((640, 700))
+
+    font = pygame.font.Font('freesansbold.ttf', 32)
 
     # Affichage du fond
     fond = pygame.image.load("images/backgroundPlay.jpg").convert()
+
+    white = (255, 255, 255)
+    green = (0, 255, 0)
+    blue = (0, 0, 128)
 
     # Charger notre jeu
     game = Game()
@@ -58,9 +66,14 @@ def play(): ##### Fonction de lancement du jeu #####
         pygame.time.delay(10)
         pygame.key.set_repeat(400, 30)
         fenetre.blit(fond, (0, 0))
+        text = font.render('Crédits :', True, blue)
+        fenetre.blit(text, (100, 660))
+        text = font.render(str(game.player.credit), True, blue)
+        fenetre.blit(text, (400, 660))
 
         # ajout d'un délait qui arrete le programme légérement pour que les déplacement soit plus lent
         pygame.time.delay(10)
+
 
         # appliquer image joueur
         fenetre.blit(game.player.image, game.player.rect)

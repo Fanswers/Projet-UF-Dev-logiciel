@@ -10,7 +10,6 @@ class Game :
         self.player = Player(self)
         self.pressed = {}
         self.all_player = pygame.sprite.Group()
-        self.player = Player(self)
         self.all_player.add(self.player)
         self.all_ennemies = pygame.sprite.Group()
         self.Spawn_ennemies()

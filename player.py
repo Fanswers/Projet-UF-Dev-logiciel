@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.credit = 0
         self.vel = 10
-        self.shootingDelay = 50
+        self.shootingDelay = 300
         self.atk = 50
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
