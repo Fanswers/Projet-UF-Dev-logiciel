@@ -213,8 +213,9 @@ def sauvegarde(): ###### Fonction sauvegarde joueur #####
                     print(game.player.playerData[game.player.playerDataIdentify][0])
                     if game.player.playerData[game.player.playerDataIdentify][0] == 'new':
                         sauvegardePseudo(aff)
+                        continuer = False
                     else :
-                        play()
+                        continuer = False
 
         pygame.display.flip()
 

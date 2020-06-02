@@ -23,7 +23,7 @@ fenetre.blit(instruction, (280, 200))
 fenetre.blit(credit, (280, 300))
 fenetre.blit(quitter, (280, 400))
 
-
+fonc.sauvegarde()
 
 cursorPos = 1 ### Variable qui permet de savoir ou se trouve la sélection du joueur dans le menu ###
 
@@ -42,7 +42,7 @@ while lancement: ##### Boucle principale / menu avant lancement u jeu #####
                 cursorPos += 1
             elif event.key == K_SPACE:
                 if cursorPos == 1: ##################################### fonction play #####################################
-                    fonc.sauvegarde()
+                    fonc.play()
                 elif cursorPos == 2:
                     fonc.instruction()
                 elif cursorPos == 3:  ##################################### fonction Credits #####################################
