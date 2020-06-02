@@ -6,7 +6,8 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.credit = 0
-        self.vel = 1
+        self.vel = 10
+        self.shootingDelay = 50
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load("images/vaisseau1.png").convert_alpha()
         self.rect = self.image.get_rect()

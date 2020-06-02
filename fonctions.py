@@ -37,7 +37,6 @@ def credits(): ##### Fonction d'affichage des credits #####
 
 
 def play(): ##### Fonction de lancement du jeu #####
-
     # Ouverture de la fenêtre Pygame
     pygame.display.set_caption("Space shooter")
     fenetre = pygame.display.set_mode((640, 640))
@@ -50,8 +49,9 @@ def play(): ##### Fonction de lancement du jeu #####
 
     # Boucle infinie
     continuer = 1
-
+    t = 0
     while continuer:
+        pygame.time.delay(10)
         pygame.key.set_repeat(400, 30)
         fenetre.blit(fond, (0, 0))
 
@@ -66,6 +66,10 @@ def play(): ##### Fonction de lancement du jeu #####
             game.player.move_up()
         if game.pressed.get(pygame.K_s) and game.player.rect.y < 640 - 96:
             game.player.move_down()
+        if game.pressed.get(pygame.K_SPACE):
+            if pygame.time.get_ticks() > (t + game.player.shootingDelay):
+                game.player.launch_projectile()
+                t = pygame.time.get_ticks()
 
         # recuperer projectile joueur
         for projectile in game.player.all_projectiles:
@@ -85,10 +89,6 @@ def play(): ##### Fonction de lancement du jeu #####
             # detecter mouvement joueur
             elif event.type == pygame.KEYDOWN:
                 game.pressed[event.key] = True
-                #Touche espace
-                if event.key == pygame.K_SPACE:
-                    game.player.launch_projectile()
-
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
 

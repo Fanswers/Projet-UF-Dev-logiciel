@@ -5,7 +5,7 @@ class Projectile(pygame.sprite.Sprite):
 
     def __init__(self, player):
         super().__init__()
-        self.vel = 1
+        self.vel = 15
         self.player = player
         self.image = pygame.image.load("images/projectile.png")
         self.rect = self.image.get_rect()
@@ -26,7 +26,7 @@ class Projectile2(pygame.sprite.Sprite):
 
     def __init__(self, player):
         super().__init__()
-        self.vel = 1
+        self.vel = 15
         self.player = player
         self.image = pygame.image.load("images/projectile.png")
         self.rect = self.image.get_rect()
