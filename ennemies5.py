@@ -8,7 +8,7 @@ class Ennemies5(pygame.sprite.Sprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 5
+        self.proba = 1
         self.swift = 2
         self.image = pygame.image.load('images/yellowEnnemi.png')
         self.rect = self.image.get_rect()
@@ -39,5 +39,5 @@ class Ennemies5(pygame.sprite.Sprite):
 
     #fonction game over lorsqu'un ennemi touche le bas de l'écran
     def game_over(self):
-        if self.rect.y == 640:
+        if self.rect.y >= 630:
             self.game.player.health -= 100

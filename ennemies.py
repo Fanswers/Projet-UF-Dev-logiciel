@@ -41,6 +41,6 @@ class Ennemies(pygame.sprite.Sprite):
 
     #fonction game over lorsqu'un ennemi touche le bas de l'écran
     def game_over(self):
-        if self.rect.y == 640:
+        if self.rect.y >= 630:
             self.game.player.health -= 100
 
