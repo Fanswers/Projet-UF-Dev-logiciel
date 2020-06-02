@@ -223,6 +223,7 @@ def play(): ##### Fonction de lancement du jeu #####
             # fermeture fenetre
             if event.type == QUIT:
                 continuer = False
+                gameover = True
             # detecter mouvement joueur
 
             elif event.type == pygame.KEYDOWN:
