@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = 544
         #shopData
         self.playerDataShop = pickle.load(open("shopData.dat", "rb"))
-        self.playerDataIdentifyShop = int(self.playerData[0][0]) - 1
+        self.playerDataIdentifyShop = int(self.playerDataShop[0][0]) - 1
         self.comptAtk = int(self.playerDataShop[self.playerDataIdentifyShop][0])
         self.prixAtk = int(self.playerDataShop[self.playerDataIdentifyShop][1])
         self.comptVitAtk = int(self.playerDataShop[self.playerDataIdentifyShop][2])
