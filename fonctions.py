@@ -214,8 +214,9 @@ def sauvegarde(): ###### Fonction sauvegarde joueur #####
                     game = Game()
                     print(game.player.playerData[game.player.playerDataIdentify][0])
                     if game.player.playerData[game.player.playerDataIdentify][0] == 'new':
-                        sauvegardePseudo(aff)
                         continuer = False
+                        sauvegardePseudo(aff)
+
                     else :
                         continuer = False
 
@@ -614,10 +615,9 @@ def ShopHorsGame():
     shop = True
     cursorShop = 0
     while shop:  ############Boucle du Shop#############
-        #PRIXatk = myFont3.render((str(game.player.prixAtk), 1, (255, 69, 0)))
-        PRIXatk = myFont3.render(str(game.player.prixAtk), 1, (255,255,255))
-        #PRIXvitatk = myFont3.render((str(game.player.prixVitAtk), 1, (255, 69, 0)))
-        PRIXvitatk = myFont3.render(str(game.player.prixVitAtk), 1, (255,255,255))
+
+        PRIXatk = myFont3.render(str(game.player.prixAtk), 1, (255, 69, 0))
+        PRIXvitatk = myFont3.render(str(game.player.prixVitAtk), 1, (255, 69, 0))
         PRIXvit = myFont3.render(str(prixVit), 1, (255, 69, 0))
         PRIXchance = myFont3.render(str(prixChance), 1, (255, 69, 0))
         CreditsActu = myFont2.render(str(game.player.credit), 1, (255, 69, 0))
@@ -685,7 +685,7 @@ def ShopHorsGame():
                         into4 = int(game.player.playerData[game.player.playerDataIdentifyShop][2]) + 20
                         game.player.playerData[game.player.playerDataIdentifyShop][2] = str(into4)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
-                        break
+
                     if cursorShop == 2 and game.player.credit > game.player.prixVitAtk and game.player.comptVitAtk < maxVitAtk:
                         #credit - prixVitAtk
                         into = int(game.player.playerData[game.player.playerDataIdentify][1]) - game.player.prixAtk
@@ -694,10 +694,13 @@ def ShopHorsGame():
 
                         game.player.prixVitAtk = game.player.prixVitAtk * 2
                         game.player.comptVitAtk += 1
+
                         #shottingDealay - 10
+                        
                         into2 = int(game.player.playerData[game.player.playerDataIdentify][3]) - 10
                         game.player.playerData[game.player.playerDataIdentify][3] = str(into2)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
+
                     if cursorShop == 3 and game.player.credit > prixVit and ComptVit < maxVit:
                         game.player.credit -= prixVit
                         prixVit = prixVit * 2
