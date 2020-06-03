@@ -683,6 +683,7 @@ def ShopHorsGame():
                         into4 = int(game.player.playerData[game.player.playerDataIdentify][2]) + 20
                         game.player.playerData[game.player.playerDataIdentify][2] = str(into4)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
+                        game.player.prixAtk = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][1])
                     if cursorShop == 2 and game.player.credit > game.player.prixVitAtk and game.player.comptVitAtk < maxVitAtk:
                         #credit - prixVitAtk
                         into = int(game.player.playerData[game.player.playerDataIdentify][1]) - game.player.prixAtk
@@ -701,6 +702,7 @@ def ShopHorsGame():
                         into4 = int(game.player.playerData[game.player.playerDataIdentify][3]) - 10
                         game.player.playerData[game.player.playerDataIdentify][3] = str(into4)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
+                        game.player.prixAtk = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][1])
                     if cursorShop == 3 and game.player.credit > prixVit and ComptVit < maxVit:
                         game.player.credit -= prixVit
                         prixVit = prixVit * 2
