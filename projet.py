@@ -20,7 +20,7 @@ quitter = myFont.render("Quitter", 1, (255, 255, 0))
 
 
 
-
+fonc.sauvegarde()
 
 cursorPos = 1 ### Variable qui permet de savoir ou se trouve la sélection du joueur dans le menu ###
 

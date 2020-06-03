@@ -1,4 +1,4 @@
-import pygame, time
+import pygame, time, pickle
 import random
 from pygame.locals import *
 from game import Game
@@ -127,12 +127,163 @@ def credits(): ##### Fonction d'affichage des credits #####
         fenetre.blit(Quitter, (510, 580))
         pygame.display.flip()
 
+def sauvegarde(): ###### Fonction sauvegarde joueur #####
+    # declaration des couleurs
+    white = (255, 255, 255)
+    green = (0, 255, 0)
+    blue = (0, 0, 128)
+
+    # Ouverture de la fenêtre Pygame
+    pygame.display.set_caption("Space shooter")
+    fenetre = pygame.display.set_mode((640, 700))
+
+    # Charger notre jeu
+    game = Game()
+
+    # police d'ecriture
+    font = pygame.font.Font('freesansbold.ttf', 32)
+
+    # Affichage du fond
+    fond = pygame.image.load("images/backgroundSave.jpg").convert()
+    saveAff1 = pygame.image.load("images/sauvegarde1.png").convert_alpha()
+    saveAff2 = pygame.image.load("images/sauvegarde2.png").convert_alpha()
+
+
+    continuer = True
+    aff = 1
+    take = game.player.playerData
+    while continuer:
+        pygame.time.delay(10)
+        pygame.key.set_repeat(400, 30)
+
+        fenetre.blit(fond, (0, 0))
+        if aff == 1:
+            fenetre.blit(saveAff2, (15, 295))
+        elif aff == 2:
+            fenetre.blit(saveAff2, (220, 295))
+        elif aff == 3:
+            fenetre.blit(saveAff2, (425, 295))
+
+        #Affichage save 1
+        fenetre.blit(saveAff1, (25, 305))
+        text = font.render(game.player.playerData[1][0], True, white)
+        fenetre.blit(text, (30, 330))
+        text = font.render("Crédit :", True, white)
+        fenetre.blit(text, (30, 360))
+        text = font.render(str(game.player.playerData[1][1]), True, white)
+        fenetre.blit(text, (30, 390))
+
+        # Affichage save 2
+        fenetre.blit(saveAff1, (230, 305))
+        text = font.render(game.player.playerData[2][0], True, white)
+        fenetre.blit(text, (235, 330))
+        text = font.render("Crédit :", True, white)
+        fenetre.blit(text, (235, 360))
+        text = font.render(str(game.player.playerData[2][1]), True, white)
+        fenetre.blit(text, (235, 390))
+
+        # Affichage save 3
+        fenetre.blit(saveAff1, (435, 305))
+        text = font.render(game.player.playerData[3][0], True, white)
+        fenetre.blit(text, (440, 330))
+        text = font.render("Crédit :", True, white)
+        fenetre.blit(text, (440, 360))
+        text = font.render(str(game.player.playerData[3][1]), True, white)
+        fenetre.blit(text, (440, 390))
+
+        for event in pygame.event.get():  # Attente des événements
+            pressed = pygame.key.get_pressed()
+            # fermeture fenetre
+            if event.type == QUIT:
+                take[0][0] = str(aff)
+                pickle.dump(take, open("playerData.dat", "wb"))
+                take[0][0] = 1
+                pickle.dump(take, open("playerData.dat", "wb"))
+                continuer = False
+            # detection touche
+            if event.type == KEYDOWN:
+                if event.key == K_RIGHT and aff <= 3: #si droite
+                    aff += 1
+                    print(aff)
+                elif event.key == K_LEFT and aff >= 1: #si gauche
+                    aff -= 1
+                    print(aff)
+                elif event.key == K_SPACE: #si espace
+                    take[0][0] = str(aff)
+                    pickle.dump(take, open("playerData.dat", "wb"))
+                    game = Game()
+                    print(game.player.playerData[game.player.playerDataIdentify][0])
+                    if game.player.playerData[game.player.playerDataIdentify][0] == 'new':
+                        sauvegardePseudo(aff)
+                        continuer = False
+                    else :
+                        continuer = False
+
+        pygame.display.flip()
+
+def sauvegardePseudo(aff):
+    # declaration des couleurs
+    white = (255, 255, 255)
+    green = (0, 255, 0)
+    blue = (0, 0, 128)
+
+    # Ouverture de la fenêtre Pygame
+    pygame.display.set_caption("Space shooter")
+    fenetre = pygame.display.set_mode((640, 700))
+
+    # Charger notre jeu
+    game = Game()
+
+    # police d'ecriture
+    font = pygame.font.Font('freesansbold.ttf', 32)
+
+    # Affichage du fond
+    fond = pygame.image.load("images/backgroundSave.jpg").convert()
+
+    userText = ''
+
+
+    continuer = True
+    while continuer:
+        pygame.time.delay(10)
+        pygame.key.set_repeat(400, 30)
+
+        fenetre.blit(fond, (0, 0))
+        text_surface = font.render(userText, True, white)
+        fenetre.blit(text_surface, (100, 100))
+        pygame.display.flip()
+
+        for event in pygame.event.get():  # Attente des événements
+            pressed = pygame.key.get_pressed()
+            # fermeture fenetre
+            if event.type == QUIT:
+                continuer = False
+            if event.type == pygame.KEYDOWN and len(userText) < 8:
+                if event.key == pygame.K_BACKSPACE:
+                    userText = userText[:-1]
+                elif event.key == pygame.K_RETURN:
+                    take = game.player.playerData
+                    take[game.player.playerDataIdentify][0] = userText
+                    pickle.dump(take, open("playerData.dat", "wb"))
+                    play()
+                else:
+                    userText += event.unicode
 
 
 def play(): ##### Fonction de lancement du jeu #####
+    # declaration des couleurs
+    white = (255, 255, 255)
+    green = (0, 255, 0)
+    blue = (0, 0, 128)
+
     # Ouverture de la fenêtre Pygame
     pygame.display.set_caption("Space shooter")
-    fenetre = pygame.display.set_mode((640, 640))
+    fenetre = pygame.display.set_mode((640, 700))
+
+    game = Game()
+
+    # police d'ecriture
+    font = pygame.font.Font('freesansbold.ttf', 32)
 
     # Affichage du fond
     fond = pygame.image.load("images/backgroundPlay.jpg").convert()
@@ -172,9 +323,14 @@ def play(): ##### Fonction de lancement du jeu #####
         pygame.time.delay(10)
         pygame.key.set_repeat(400, 30)
         fenetre.blit(fond, (0, 0))
+        text = font.render('Crédits :', True, blue)
+        fenetre.blit(text, (100, 660))
+        text = font.render(str(game.player.playerData[game.player.playerDataIdentify][1]), True, blue)
+        fenetre.blit(text, (400, 660))
 
         # ajout d'un délait qui arrete le programme légérement pour que les déplacement soit plus lent
         pygame.time.delay(10)
+
 
         # appliquer image joueur
         fenetre.blit(game.player.image, game.player.rect)
@@ -210,10 +366,6 @@ def play(): ##### Fonction de lancement du jeu #####
 
         # Charger ensemble image groupe ennemis
         game.all_ennemies.draw(fenetre)
-
-
-
-
 
         # Rafraîchissement de l'écran
         pygame.display.flip()
