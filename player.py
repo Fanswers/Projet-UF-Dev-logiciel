@@ -3,13 +3,12 @@ from typing import List, Union
 import pygame, pickle
 from projectile import Projectile, Projectile2
 
-#take = pickle.load(open("playerData.dat", "rb"))
-#take[0][0] = 1
-#take[4][0] = 0
-take = [[1], ['new', '0', '50', '150'], ['new', '0', '50', '150'], ['new', '0', '50', '150']]
-take2 = [['0', '500', '0', '500'], ['0', '500', '0', '500'], ['0', '500', '0', '500']]
+take = pickle.load(open("playerData.dat", "rb"))
+take[0][0] = 1
+#take = [[1], ['new', '0', '50', '150'], ['new', '0', '50', '150'], ['new', '0', '50', '150'],[0]]
+#take2 = [['0', '500', '0', '500'], ['0', '500', '0', '500'], ['0', '500', '0', '500']]
 pickle.dump(take, open("playerData.dat", "wb"))
-pickle.dump(take2, open("shopData.dat", "wb"))
+#pickle.dump(take2, open("shopData.dat", "wb"))
 
 class Player(pygame.sprite.Sprite):
 
