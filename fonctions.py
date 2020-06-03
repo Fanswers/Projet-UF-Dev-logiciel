@@ -141,7 +141,7 @@ def sauvegarde(): ###### Fonction sauvegarde joueur #####
     game = Game()
 
     # police d'ecriture
-    font = pygame.font.Font('freesansbold.ttf', 32)
+    font = pygame.font.SysFont("Arial", 32)
 
     # Affichage du fond
     fond = pygame.image.load("images/backgroundSave.jpg").convert()
@@ -235,7 +235,7 @@ def sauvegardePseudo(aff):
     game = Game()
 
     # police d'ecriture
-    font = pygame.font.Font('freesansbold.ttf', 32)
+    font = pygame.font.SysFont("Arial", 32)
 
     # Affichage du fond
     fond = pygame.image.load("images/backgroundSave.jpg").convert()
@@ -249,8 +249,10 @@ def sauvegardePseudo(aff):
         pygame.key.set_repeat(400, 30)
 
         fenetre.blit(fond, (0, 0))
-        text_surface = font.render(userText, True, white)
-        fenetre.blit(text_surface, (100, 100))
+        textRect = pygame.image.load("images/textRect.png").convert_alpha()
+        fenetre.blit(textRect, (220, 350))
+        textSurface = font.render(userText, True, white)
+        fenetre.blit(textSurface, (240, 350))
         pygame.display.flip()
 
         for event in pygame.event.get():  # Attente des événements
@@ -283,7 +285,8 @@ def play(): ##### Fonction de lancement du jeu #####
     game = Game()
 
     # police d'ecriture
-    font = pygame.font.Font('freesansbold.ttf', 32)
+    font = pygame.font.SysFont("Arial", 32)
+
 
     # Affichage du fond
     fond = pygame.image.load("images/backgroundPlay.jpg").convert()
@@ -564,7 +567,7 @@ def play(): ##### Fonction de lancement du jeu #####
                     end = False
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == K_KP_ENTER or event.key == K_c:
+                    if event.key == K_RETURN or event.key == K_c:
                         end = False
             fenetre.blit(fond, (0, 0))
             fenetre.blit(Fin, (100, 150))
