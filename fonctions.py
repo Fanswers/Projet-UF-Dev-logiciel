@@ -684,6 +684,7 @@ def ShopHorsGame():
                         game.player.playerData[game.player.playerDataIdentify][2] = str(into4)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
                         game.player.prixAtk = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][1])
+
                     if cursorShop == 2 and game.player.credit > game.player.prixVitAtk and game.player.comptVitAtk < maxVitAtk:
                         #credit - prixVitAtk
                         into = int(game.player.playerData[game.player.playerDataIdentify][1]) - game.player.prixAtk
@@ -703,6 +704,8 @@ def ShopHorsGame():
                         game.player.playerData[game.player.playerDataIdentify][3] = str(into4)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
                         game.player.prixAtk = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][1])
+
+
                     if cursorShop == 3 and game.player.credit > prixVit and ComptVit < maxVit:
                         game.player.credit -= prixVit
                         prixVit = prixVit * 2
@@ -749,7 +752,7 @@ def ShopHorsGame():
 
         fenetre.blit(Quitter, (510, 580))
         fenetre.blit(Shop, (200, 70))
-        fenetre.blit(CreditsActu, (230, 210))
+        fenetre.blit(CreditsActu, (190, 210))
         fenetre.blit(CreditsActu2, (300, 210))
         pygame.display.flip()
 
