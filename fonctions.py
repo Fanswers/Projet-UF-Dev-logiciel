@@ -580,12 +580,12 @@ def ShopHorsGame():
     fenetre = pygame.display.set_mode((640, 640))
     ############ Initialisation des variables des prix du shop #############
     game = Game()
-    prixAtk = 500
+    #prixAtk = 500
     maxAtk = 5
-    ComptAtk = 0
-    prixVitAtk = 500
+    #ComptAtk = 0
+    #prixVitAtk = 500
     maxVitAtk = 5
-    ComptVitAtk = 0
+    #ComptVitAtk = 0
     prixVit = 1000
     maxVit = 0
     ComptVit = 0
@@ -614,8 +614,10 @@ def ShopHorsGame():
     shop = True
     cursorShop = 0
     while shop:  ############Boucle du Shop#############
-        PRIXatk = myFont3.render(str(prixAtk), 1, (255, 69, 0))
-        PRIXvitatk = myFont3.render(str(prixVitAtk), 1, (255, 69, 0))
+        #PRIXatk = myFont3.render((str(game.player.prixAtk), 1, (255, 69, 0)))
+        PRIXatk = myFont3.render(str(game.player.prixAtk), 1, (255,255,255))
+        #PRIXvitatk = myFont3.render((str(game.player.prixVitAtk), 1, (255, 69, 0)))
+        PRIXvitatk = myFont3.render(str(game.player.prixVitAtk), 1, (255,255,255))
         PRIXvit = myFont3.render(str(prixVit), 1, (255, 69, 0))
         PRIXchance = myFont3.render(str(prixChance), 1, (255, 69, 0))
         CreditsActu = myFont2.render(str(game.player.credit), 1, (255, 69, 0))
@@ -663,16 +665,39 @@ def ShopHorsGame():
                     cursorShop = 3
 
                 elif event.key == K_SPACE:
-                    if (cursorShop == 1 or cursorShop == 0) and game.player.credit > prixAtk and ComptAtk < maxAtk:
-                        game.player.credit -= prixAtk
-                        prixAtk = prixAtk * 2
-                        ComptAtk += 1
-                        game.player.atk += 20
-                    if cursorShop == 2 and game.player.credit > prixVitAtk and ComptVitAtk < maxVitAtk:
-                        game.player.credit -= prixVitAtk
-                        prixVitAtk = prixVitAtk * 2
-                        ComptVitAtk += 1
-                        game.player.shootingDelay -= 10
+                    if (cursorShop == 1 or cursorShop == 0) and game.player.credit >= game.player.prixAtk and game.player.comptAtk < maxAtk:
+                        #credit = prixAtk
+                        into = int(game.player.playerData[game.player.playerDataIdentifyShop][1]) - game.player.prixAtk
+                        game.player.playerData[game.player.playerDataIdentifyShop][1] = str(into)
+                        pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
+
+                        #game.player.comptAtk += 1
+                        into2 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][0]) + 1
+                        game.player.playerDataShop[game.player.playerDataIdentifyShop][0] = str(into2)
+                        pickle.dump(game.player.playerDataShop, open("shopData.dat", "wb"))
+
+                        # game.player.prixAtk = game.player.prixAtk * 2
+                        into3 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][1]) * 2
+                        game.player.playerDataShop[game.player.playerDataIdentifyShop][1] = str(into3)
+                        pickle.dump(game.player.playerDataShop, open("shopData.dat", "wb"))
+
+                        #atk + 20
+                        into4 = int(game.player.playerData[game.player.playerDataIdentifyShop][2]) + 20
+                        game.player.playerData[game.player.playerDataIdentifyShop][2] = str(into4)
+                        pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
+                        break
+                    if cursorShop == 2 and game.player.credit > game.player.prixVitAtk and game.player.comptVitAtk < maxVitAtk:
+                        #credit - prixVitAtk
+                        into = int(game.player.playerData[game.player.playerDataIdentify][1]) - game.player.prixAtk
+                        game.player.playerData[game.player.playerDataIdentify][1] = str(into)
+                        pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
+
+                        game.player.prixVitAtk = game.player.prixVitAtk * 2
+                        game.player.comptVitAtk += 1
+                        #shottingDealay - 10
+                        into2 = int(game.player.playerData[game.player.playerDataIdentify][3]) - 10
+                        game.player.playerData[game.player.playerDataIdentify][3] = str(into2)
+                        pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
                     if cursorShop == 3 and game.player.credit > prixVit and ComptVit < maxVit:
                         game.player.credit -= prixVit
                         prixVit = prixVit * 2
@@ -690,14 +715,14 @@ def ShopHorsGame():
         fenetre.blit(arrowShop, position_arrowShop)
 
         fenetre.blit(Atk, (120, 357))  ###### affichage prix Attaque ######
-        if ComptAtk == maxAtk:
+        if game.player.comptAtk == maxAtk:
             fenetre.blit(MAX, (230, 357))
         else:
             fenetre.blit(PRIXatk, (225, 357))
             fenetre.blit(Credit, (270, 357))
 
         fenetre.blit(VitAtk, (390, 357))  ###### affichage prix  Vitesse d'attaque ######
-        if ComptVitAtk == maxVitAtk:
+        if game.player.comptVitAtk == maxVitAtk:
             fenetre.blit(MAX, (550, 357))
         else:
             fenetre.blit(PRIXvitatk, (545, 357))
