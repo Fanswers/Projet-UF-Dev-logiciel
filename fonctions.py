@@ -670,19 +670,19 @@ def ShopHorsGame():
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
 
                         #game.player.comptAtk += 1
-                        into2 = int(game.player.playerDataShop[game.player.playerDataIdentify - 1][0]) + 1
-                        game.player.playerDataShop[game.player.playerDataIdentify - 1][0] = str(into2)
+                        into2 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][0]) + 1
+                        game.player.playerDataShop[game.player.playerDataIdentifyShop][0] = str(into2)
                         pickle.dump(game.player.playerDataShop, open("shopData.dat", "wb"))
 
                         # game.player.prixAtk = game.player.prixAtk * 2
-                        into3 = int(game.player.playerDataShop[game.player.playerDataIdentify - 1][1]) * 2
-                        game.player.playerDataShop[game.player.playerDataIdentify - 1][1] = str(into3)
+                        into3 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][1]) * 2
+                        game.player.playerDataShop[game.player.playerDataIdentifyShop][1] = str(into3)
                         pickle.dump(game.player.playerDataShop, open("shopData.dat", "wb"))
 
                         #atk + 20
                         into4 = int(game.player.playerData[game.player.playerDataIdentify][2]) + 20
                         game.player.playerData[game.player.playerDataIdentify][2] = str(into4)
-                        pickle.dump(game.player.playerDataShop, open("playerData.dat", "wb"))
+                        pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
                     if cursorShop == 2 and game.player.credit > game.player.prixVitAtk and game.player.comptVitAtk < maxVitAtk:
                         #credit - prixVitAtk
                         into = int(game.player.playerData[game.player.playerDataIdentify][1]) - game.player.prixAtk
@@ -690,18 +690,16 @@ def ShopHorsGame():
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
 
                         #game.player.prixVitAtk = game.player.prixVitAtk * 2
+                        into2 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][3]) * 2
+                        game.player.playerDataShop[game.player.playerDataIdentifyShop][3] = str(into2)
+                        pickle.dump(game.player.playerDataShop, open("playerData.dat", "wb"))
                         #game.player.comptVitAtk += 1
-                        into1 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][3]) - game.player.prixAtk
-                        game.player.playerDataShop[game.player.playerDataIdentifyShop][3] = str(into1)
+                        into3 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][2]) + 1
+                        game.player.playerDataShop[game.player.playerDataIdentifyShop][2] = str(into3)
                         pickle.dump(game.player.playerDataShop, open("playerData.dat", "wb"))
-
-                        into2 = int(game.player.playerDataShop[game.player.playerDataIdentifyShop][2]) - game.player.prixAtk
-                        game.player.playerDataShop[game.player.playerDataIdentifyShop][2] = str(into2)
-                        pickle.dump(game.player.playerDataShop, open("playerData.dat", "wb"))
-
                         #shottingDealay - 10
-                        into3 = int(game.player.playerData[game.player.playerDataIdentify][3]) - 10
-                        game.player.playerData[game.player.playerDataIdentify][3] = str(into3)
+                        into4 = int(game.player.playerData[game.player.playerDataIdentify][3]) - 10
+                        game.player.playerData[game.player.playerDataIdentify][3] = str(into4)
                         pickle.dump(game.player.playerData, open("playerData.dat", "wb"))
                     if cursorShop == 3 and game.player.credit > prixVit and ComptVit < maxVit:
                         game.player.credit -= prixVit
