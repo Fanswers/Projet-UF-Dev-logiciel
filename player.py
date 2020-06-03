@@ -10,6 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.credit = 0
         self.vel = 7
+        self.score = 0
         self.shootingDelay = 150
         self.atk = 50
         self.all_projectiles = pygame.sprite.Group()

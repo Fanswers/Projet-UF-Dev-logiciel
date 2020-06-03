@@ -229,7 +229,7 @@ def play(): ##### Fonction de lancement du jeu #####
             elif event.type == pygame.KEYDOWN:
                 game.pressed[event.key] = True
 
-                if event.key == K_p: ###################################### MAGASIN ######################################
+                if event.key == K_m: ###################################### MAGASIN ######################################
                     fondShop = pygame.image.load("images/backgroundMenu.jpg").convert()
                     myFont = pygame.font.SysFont("Arial", 85)
                     myFont2 = pygame.font.SysFont("Arial", 45)
@@ -264,7 +264,7 @@ def play(): ##### Fonction de lancement du jeu #####
                             if event.type == pygame.QUIT:
                                 shop = False
                             if event.type == pygame.KEYDOWN:
-                                if event.key == K_p:
+                                if event.key == K_m:
                                     shop = False
                                 elif (event.key == K_UP or event.key == K_z) and cursorShop == 3:
                                     position_arrowShop = position_arrowShop.move(0, -100)
@@ -402,7 +402,7 @@ def play(): ##### Fonction de lancement du jeu #####
         Fin = myFont.render("GAME OVER", 1, (255, 255, 0))
         Score = myFont2.render("score :", 1, (255, 255, 0))
         Continuer = myFont2.render("Entrer pour continuer", 1, (255, 255, 0))
-        Credit = str(game.player.credit)
+        Credit = str(game.player.score)
         Score2 = myFont2.render(Credit, 1, (255, 255, 0))
         print("mort")
         end = True
