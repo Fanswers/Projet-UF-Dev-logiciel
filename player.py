@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         print(self.playerData)
         self.credit = int(self.playerData[self.playerDataIdentify][1])
         self.vel = 10
+        self.score = 0
         self.shootingDelay = 150
         self.atk = 50
         self.all_projectiles = pygame.sprite.Group()
