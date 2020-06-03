@@ -15,13 +15,10 @@ position_arrow = position_arrow.move(100, 100)
 myFont = pygame.font.SysFont("Arial", 50)
 start = myFont.render("Jouer", 1, (255, 255, 0))
 instruction = myFont.render("Instruction", 1, (255, 255, 0))
-credit = myFont.render("Credits", 1, (255, 255, 0))
+magasin = myFont.render("Magasin", 1, (255, 255, 0))
 quitter = myFont.render("Quitter", 1, (255, 255, 0))
 
-fenetre.blit(start, (150, 100))
-fenetre.blit(instruction, (280, 200))
-fenetre.blit(credit, (280, 300))
-fenetre.blit(quitter, (280, 400))
+
 
 
 
@@ -46,7 +43,7 @@ while lancement: ##### Boucle principale / menu avant lancement u jeu #####
                 elif cursorPos == 2:
                     fonc.instruction()
                 elif cursorPos == 3:  ##################################### fonction Credits #####################################
-                    fonc.credits()
+                    fonc.ShopHorsGame()
                 elif cursorPos == 4:
                     lancement = False
                     pygame.quit()
@@ -55,7 +52,7 @@ while lancement: ##### Boucle principale / menu avant lancement u jeu #####
     fenetre.blit(arrow, position_arrow)
     fenetre.blit(start, (280, 100))
     fenetre.blit(instruction, (280, 200))
-    fenetre.blit(credit, (280, 300))
+    fenetre.blit(magasin, (280, 300))
     fenetre.blit(quitter, (280, 400))
     pygame.display.flip()
 
